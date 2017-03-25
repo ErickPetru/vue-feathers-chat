@@ -1,12 +1,11 @@
 {
-  "host": "vue-feathers-chat-app.feathersjs.com",
+  "host": "vue-feathers-chat.mybluemix.net",
   "port": 80,
-  "nedb": "NEDB_BASE_PATH",
+  "nedb": "../data/",
   "public": "../public/",
   "auth": {
     "token": {
       "secret": "FEATHERS_AUTH_SECRET"
-    },
-    "local": {}
+    }
   }
 }

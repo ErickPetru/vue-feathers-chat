@@ -6,7 +6,6 @@
   "auth": {
     "token": {
       "secret": "TJHhwIRNcQbOL6JjQmDl4mAI+j8C3JrfwGWQJLTePqlvYfgXuITmXDyhOkJkgNdIxWM5N4TboHIeVPzS/zUJdw=="
-    },
-    "local": {}
+    }
   }
 }
