@@ -1,4 +1,4 @@
-const socket = io('http://localhost:3030/')
+const socket = io(location.origin ? location.origin : 'localhost:3030')
 
 const app = new Vue({
   el: '#app',
