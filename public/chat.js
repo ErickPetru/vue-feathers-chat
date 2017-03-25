@@ -1,8 +1,10 @@
-const socket = io(location.origin ? location.origin : 'localhost:3030')
+if (!window.location.origin) window.location.origin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '')
 
-const app = new Vue({
+var socket = io(window.location.origin + '/')
+
+var app = new Vue({
   el: '#app',
-  data() {
+  data: function() {
     return {
       messages: null,
       user: '',
@@ -10,51 +12,57 @@ const app = new Vue({
     }
   },
   methods: {
-    enter() {
-      if (!this.user) {
-        this.$messages.user.focus()
+    enter: function() {
+      if (!app.user) {
+        app.$messages.user.focus()
         return
       }
 
-      this.messages = []
+      app.messages = []
 
-      socket.emit('messages::find', { $sort: { createdAt: -1 } }, (error, page) => {
+      socket.emit('messages::find', { $sort: { createdAt: -1 } }, function (error, page) {
         page.data.reverse()
-        this.messages = page.data
-
-        setTimeout(() => this.scroll(), 1000)
+        app.messages = page.data
+        setTimeout(app.scroll, 1000)
       })
 
-      socket.on('messages created', m => {
-        if (m.createdBy !== this.user) this.messages.push(m)
-        this.scroll()
+      socket.on('messages created', function(message) {
+        if (message.createdBy !== app.user) app.messages.push(message)
+        app.scroll()
       })
     },
-    leave() {
-      this.user = this.messages = null
-      setTimeout(() => this.scroll(), 1000)
+    leave: function() {
+      app.user = app.messages = null
+      setTimeout(app.scroll, 1000)
     },
-    send() {
-      if (this.text) {
-        const m = { text: this.text, createdBy: this.user }
-        socket.emit('messages::create', m)
-        this.messages.push(m)
-        this.$refs.text.focus()
-        this.text = ''
+    send: function() {
+      if (app.text) {
+        var message = { text: app.text, createdBy: app.user }
+        socket.emit('messages::create', message)
+        app.messages.push(message)
+        app.$refs.text.focus()
+        app.text = ''
       }
     },
-    scroll() {
-      Vue.nextTick(() => {
-        if (this.$refs.list) {
-          this.$refs.list.scrollTop = this.$refs.list.scrollHeight
-          this.$refs.text.focus()
+    scroll: function(delay) {
+      var doScroll = function() {
+        if (app.$refs.list) {
+          app.$refs.list.scrollTop = app.$refs.list.scrollHeight
+          app.$refs.text.focus()
         } else {
-          this.$refs.user.focus()
+          app.$refs.user.focus()
         }
-      })
+      }
+
+      if (delay)
+        setTimeout(function() {
+          Vue.nextTick(doScroll)
+        }, delay)
+      else
+        Vue.nextTick(doScroll)
     }
   },
-  mounted() {
+  mounted: function() {
     this.$refs.user.focus()
   }
 })
