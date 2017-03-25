@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Vue-Feathers Chat</title>
+
+  <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+  <div id="app">
+    <template v-if="true">
+      <transition name="page" mode="out-in">
+        <main v-if="!messages">
+          <img src="vue.png" alt="Vue Chat">
+          <h1>Vue-Feathers Chat</h1>
+
+          <div class="login">
+            <input v-model="user" ref="user" placeholder="Choose your nickname" @keypress.enter="enter">
+            <button @click="enter" :disabled="!user">Enter</button>
+          </div>
+        </main>
+        <div v-else>
+          <header>
+            <button @click="leave" class="close">Leave</button>
+            <p>Talking as <b>{{ user }}</b></p>
+          </header>
+
+          <div class="list" ref="list">
+            <ul>
+              <li v-for="m of messages" :key="m._id" :class="{ 'message-out': m.createdBy === user }">
+                <b v-if="m.createdBy !== user">{{ m.createdBy }}:</b>
+                {{ m.text }}
+              </li>
+            </ul>
+          </div>
+
+          <footer>
+            <input v-model="text" ref="text" placeholder="Type a message" @keypress.enter="send">
+            <button @click="send" :disabled="!text">Send</button>
+          </footer>
+        </div>
+      </transition>
+    </template>
+  </div>
+
+  <script src="socket.io.min.js"></script>
+  <script src="vue.min.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>

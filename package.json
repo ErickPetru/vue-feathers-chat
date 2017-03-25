@@ -1,0 +1,42 @@
+{
+  "name": "vue-feathers-chat",
+  "description": "A sample realtime chat made with Vue and Feathers",
+  "version": "1.0.0",
+  "main": "src/",
+  "keywords": [
+    "chat", "vue", "feathers", "socket.io", "nedb"
+  ],
+  "license": "MIT",
+  "author": "Erick Eduardo Petrucelli <erick.petrucelli@fatectq.edu.br>",
+  "engines": {
+    "node": ">= 0.12.0"
+  },
+  "scripts": {
+    "test": "npm run jshint && npm run mocha",
+    "jshint": "jshint src/. test/. --config",
+    "start": "node src/",
+    "mocha": "mocha test/ --recursive"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "compression": "^1.6.2",
+    "cors": "^2.8.1",
+    "feathers": "^2.1.1",
+    "feathers-authentication": "^0.7.12",
+    "feathers-configuration": "^0.3.3",
+    "feathers-errors": "^2.6.2",
+    "feathers-hooks": "^1.8.1",
+    "feathers-nedb": "^2.6.1",
+    "feathers-rest": "^1.7.1",
+    "feathers-socketio": "^1.5.2",
+    "nedb": "^1.8.0",
+    "passport": "^0.3.2",
+    "serve-favicon": "^2.4.1",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.4",
+    "mocha": "^3.2.0",
+    "request": "^2.81.0"
+  }
+}

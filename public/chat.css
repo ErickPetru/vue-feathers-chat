@@ -1,0 +1,173 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+#app {
+  font: 1.25em/135% Sans-serif;
+  background: #e5ddd5 url('back.png') repeat center center;
+  background-size: auto 75vw;
+  perspective: 100vw;
+}
+
+.page-enter-active, .page-leave-active {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, .25);
+  transform-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+.page-enter-active {
+  transition: all .35s ease-out;
+}
+
+.page-enter {
+  opacity: 0;
+  transform: scale(.85) rotateY(-45deg);
+}
+
+.page-leave-to {
+  opacity: .5;
+  transform: translateX(-100vw) scale(.7) rotateY(180deg);
+  transform-origin: left center;
+  transition: all .75s ease-in;
+}
+
+header {
+  flex: 1;
+  background: #f5f1ee;
+  display: flex;
+  align-items: center;
+  padding: 0 .5em;
+  height: 2.5em;
+  border-bottom: 1px solid rgba(0, 0, 0, .08);
+}
+
+header p {
+  font-size: .75em;
+  margin: 0;
+}
+
+.list {
+  height: calc(100vh - 6.5em);
+  padding: 1em 1em 0;
+  background: rgba(229, 221, 213, .94);
+  overflow: auto;
+}
+
+ul {
+  display: flex;
+  flex-flow: column;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 1em;
+}
+
+li {
+  margin: .125em 0;
+  padding: .5em 1.25em;
+  background: white;
+  border-radius: 1em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+  align-self: flex-start;
+}
+
+li.message-out {
+  background: #dcf8c6;
+  align-self: flex-end;
+}
+
+footer {
+  flex: 1;
+  background: #f5f1ee;
+  display: flex;
+  padding: 1em;
+  height: 4em;
+}
+
+input {
+  flex: 1;
+  padding: .5em 1em;
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  font-size: .75em;
+  outline: none;
+  min-height: 2.5rem;
+  transition: all .25s ease-in-out;
+}
+
+input:focus {
+  border: 1px solid #e5ddd5;
+}
+
+::-moz-placeholder {
+  opacity: 1;
+  color: #a4a4a4;
+}
+
+::-webkit-input-placeholder {
+  color: #a4a4a4;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  width: 2.5em;
+  min-height: 2.5rem;
+  margin-left: .5em;
+  text-indent: -100vw;
+  overflow: hidden;
+  outline: none;
+  background: url('send.svg') no-repeat center center;
+  transition: all .25s ease-in-out;
+}
+
+button.close {
+  background-image: url('close.svg');
+  margin-right: .5em;
+}
+
+button:focus {
+  border: 1px solid #a4a4a4;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: default;
+}
+
+main {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #eee;
+  overflow: auto;
+  padding: 1em;
+}
+
+main img {
+  height: 14vw;
+}
+
+main h1 {
+  font-weight: 400;
+  font-size: 1.75em;
+  margin: .5em 0 2em;
+}
+
+.login {
+  flex: 0;
+  margin-bottom: 1em;
+}
